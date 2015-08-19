@@ -1,2 +1,3 @@
-# world-clock
-World Clock as seen on timeanddate.com in Dutch
+# World Clock
+
+World Clock as seen on timeanddate.com in Dutch.
