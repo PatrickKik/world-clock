@@ -4,33 +4,32 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WorldClockDutch {
 
     public static void main(String[] args) {
-        List<String> lines = new WorldClockDutch().dump(LocalTime.now());
-        lines.forEach(System.out::println);
+        final WorldClockDutch worldClockDutch = new WorldClockDutch();
+        final LocalTime now = LocalTime.now();
 
-        System.out.println(new WorldClockDutch().visibleTerms(LocalTime.now()));
-
+        System.out.println(worldClockDutch.visibleTerms(now));
+        System.out.println();
+        worldClockDutch.dump(now).forEach(System.out::println);
     }
 
-    public List<Term> visibleTerms(LocalTime time) {
-        time = time.with(t -> {
+    public List<Term> visibleTerms(final LocalTime time) {
+        final LocalTime timeRounded = time.with(t -> {
             LocalTime lt = (LocalTime) t;
             return LocalTime.of(lt.getHour(), lt.getMinute() / 5 * 5);
         });
 
-        final List<Term> visibleTerms = new ArrayList<>(6);
-        for (Term term : Term.values()) {
-            if (term.isVisible(time)) {
-                visibleTerms.add(term);
-            }
-        }
-        return visibleTerms;
+        return Stream.of(Term.values())
+                .filter(term -> term.isVisible(timeRounded))
+                .collect(Collectors.toList());
     }
 
-    public List<String> dump(LocalTime time) {
+    private List<String> dump(LocalTime time) {
         time = time.with(t -> {
             LocalTime lt = (LocalTime) t;
             return LocalTime.of(lt.getHour(), lt.getMinute() / 5 * 5);
