@@ -5,24 +5,24 @@ import java.util.function.Predicate;
 
 //   012345678901
 // 0 Het Is Vijf
-// 1 Tien  Kwart
-// 2 Over   Voor
+// 1  Tien  Kwart
+// 2   Over  Voor
 // 3 Half EenTwee
 // 4 DrieVierVijf
 // 5 ZesZevenAcht
 // 6 NegenTienElf
-// 7 Twaalf  Uur
+// 7 Twaalf   Uur
 public enum Term {
 
     HET(0, 0, "HET", time -> true),
     IS(0, 4, "IS", time -> true),
 
     VIJF_MINUTEN(0, 7, "VIJF", time -> time.getMinute() == 5 || time.getMinute() == 25 || time.getMinute() == 35 || time.getMinute() == 55),
-    TIEN_MINUTEN(1, 0, "TIEN", time -> time.getMinute() == 10 || time.getMinute() == 20 || time.getMinute() == 40 || time.getMinute() == 50),
+    TIEN_MINUTEN(1, 1, "TIEN", time -> time.getMinute() == 10 || time.getMinute() == 20 || time.getMinute() == 40 || time.getMinute() == 50),
     KWART(1, 6, "KWART", time -> time.getMinute() == 15 || time.getMinute() == 45),
 
-    OVER(2, 0, "OVER", time -> time.getMinute() > 0 && time.getMinute() <= 15 || time.getMinute() >= 35 && time.getMinute() <= 40),
-    VOOR(2, 7, "VOOR", time -> time.getMinute() >= 20 && time.getMinute() <= 25 || time.getMinute() >= 45),
+    OVER(2, 2, "OVER", time -> time.getMinute() > 0 && time.getMinute() <= 15 || time.getMinute() >= 35 && time.getMinute() <= 40),
+    VOOR(2, 8, "VOOR", time -> time.getMinute() >= 20 && time.getMinute() <= 25 || time.getMinute() >= 45),
 
     HALF(3, 0, "HALF", time -> time.getMinute() >= 20 && time.getMinute() <= 40),
 
@@ -39,7 +39,7 @@ public enum Term {
     ELF(6, 9, "ELF", time -> time.getHour() % 12 == 10 && time.getMinute() >= 20 || time.getHour() % 12 == 11 && time.getMinute() <= 15),
     TWAALF(7, 0, "TWAALF", time -> time.getHour() % 12 == 11 && time.getMinute() >= 20 || time.getHour() % 12 == 0 && time.getMinute() <= 15),
 
-    UUR(7, 8, "UUR", time -> time.getMinute() == 0);
+    UUR(7, 9, "UUR", time -> time.getMinute() == 0);
 
     private final int row;
     private final int col;
